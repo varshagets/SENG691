@@ -1,0 +1,28 @@
+from(bucket: "seng")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "kafka_consumer")
+  |> filter(fn: (r) => r["_field"] == "temperature_value")
+  |> filter(fn: (r) => r["host"] == "Varsha")
+  |> aggregateWindow(every: 5m, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+from(bucket: "seng")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "kafka_consumer")
+  |> filter(fn: (r) => r["_field"] == "temperature_value")
+  |> filter(fn: (r) => r["host"] == "Varsha")
+  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+
+from(bucket: "seng")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "kafka_consumer")
+  |> filter(fn: (r) => r["_field"] == "humidity_value")
+  |> filter(fn: (r) => r["host"] == "Varsha")
+  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+  |> yield(name: "mean")
+
+
+
+
